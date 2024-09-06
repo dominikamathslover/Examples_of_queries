@@ -1,4 +1,5 @@
-/*
+/* DATABASE hospital.db (HARD) https://www.sql-practice.com/
+
 Question 21. 
 Show all of the patients grouped into weight groups.
 Show the total amount of patients in each weight group.
@@ -67,7 +68,7 @@ Query:
 */ 
 
 SELECT DISTINCT
-  	    admissions.patient_id,
+  	admissions.patient_id,
     	CONCAT(admissions.patient_id,len(patients.last_name),year(patients.birth_date)) AS temp_password
 FROM 	patients JOIN admissions ON admissions.patient_id = patients.patient_id
 
@@ -180,7 +181,7 @@ Query:
 */ 
 
 SELECT
-	    doctors.doctor_id,
+	doctors.doctor_id,
     	concat(doctors.first_name, ' ',doctors.last_name) AS doctor_full_name,
     	doctors.specialty,
     	YEAR(admissions.admission_date),
