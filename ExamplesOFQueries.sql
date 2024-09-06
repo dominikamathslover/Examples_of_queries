@@ -1,4 +1,5 @@
-/*
+/* DATABASE hospital.db (MEDIUM) https://www.sql-practice.com/
+
 Question 1. 
 Display every patient's first_name.
 Order the list by the length of each name and then by alphabetically.
