@@ -1,4 +1,7 @@
-/*
+/* DATABASE hospital.db (MEDIUM) https://www.sql-practice.com/
+
+
+
 Question 11. 
 Show the difference between the largest weight and smallest weight for patients with the last name 'Maroni'
 
@@ -6,10 +9,10 @@ Query:
 */
 
 SELECT 
- 	    (MAX(weight)-MIN(weight)) AS max_height_difference
+ 	(MAX(weight)-MIN(weight)) AS max_height_difference
 FROM 	patients
 WHERE 
-	    last_name ='Maroni'
+	last_name ='Maroni'
 
 /*
 Question 12.
@@ -19,12 +22,12 @@ Query:
 */
 
 SELECT 
- 	    day(admission_date), count(patient_id)
+ 	day(admission_date), count(patient_id)
 FROM 	admissions
 GROUP BY
-	    day(admission_date)
+	DAY(admission_date)
 ORDER BY
-	    count(patient_id) DESC
+	COUNT(patient_id) DESC
 
 /*
 Question 12.
@@ -34,13 +37,13 @@ Query:
 */
 
 SELECT 
-	    *
+	*
 FROM 	admissions
 WHERE 	patient_id = 542
 GROUP BY 
-	    patient_id
+	patient_id
 HAVING
-  	    admission_date = MAX(admission_date);
+  	admission_date = MAX(admission_date);
 
 /*
 Question 13.
@@ -52,13 +55,13 @@ Query:
 */
 
 SELECT 
-	    patient_id, 
-	    attending_doctor_id, 
-	    diagnosis
+	patient_id, 
+	attending_doctor_id, 
+	diagnosis
 FROM 	admissions
 WHERE 	(MOD(patient_id,2)=1 AND attending_doctor_id in(1,5,19))
-	    OR 
-	    (attending_doctor_id like '%2%' and LEN(patient_id)=3 )
+	OR 
+	(attending_doctor_id like '%2%' and LEN(patient_id)=3 )
 
 
 /*
@@ -71,9 +74,9 @@ Query:
 */
 
 SELECT 
-	    doctors.first_name, 
-	    doctors.last_name, 
-	    COUNT(attending_doctor_id)
+	doctors.first_name, 
+	doctors.last_name, 
+	COUNT(attending_doctor_id)
 FROM 	admissions JOIN doctors ON doctors.doctor_id = admissions.attending_doctor_id
 GROUP BY 
         attending_doctor_id
@@ -86,13 +89,13 @@ Query:
 */
 
 SELECT 
-	    doctors.doctor_id,
+	doctors.doctor_id,
         CONCAT(doctors.first_name, ' ',  doctors.last_name) AS full_name, 
         MIN(admission_date),
         Max(admission_date)  
 FROM 	admissions JOIN doctors ON doctors.doctor_id = admissions.attending_doctor_id
 GROUP BY 
-	    doctor_id
+	doctor_id
 		
 /*
 Question 16.
@@ -102,11 +105,11 @@ Query:
 */
 
 SELECT 
-	    province_names.province_name, 
-	    COUNT(patient_id)
+	province_names.province_name, 
+	COUNT(patient_id)
 FROM 	patients JOIN province_names ON province_names.province_id = patients.province_id
 GROUP BY 
-	    province_names.province_name
+	province_names.province_name
 ORDER BY 
         COUNT(patient_id) DESC
 
@@ -118,9 +121,9 @@ Query:
 */
 
 SELECT
-  	    CONCAT(patients.first_name, ' ', patients.last_name) as patient_full_name, 
+  	CONCAT(patients.first_name, ' ', patients.last_name) as patient_full_name, 
         diagnosis,
-  	    CONCAT(doctors.first_name,' ',doctors.last_name) as doctor_full_name
+  	CONCAT(doctors.first_name,' ',doctors.last_name) as doctor_full_name
 FROM 	patients
   JOIN 	admissions ON admissions.patient_id = patients.patient_id
   JOIN 	doctors ON doctors.doctor_id = admissions.attending_doctor_id
@@ -133,12 +136,12 @@ Query:
 */
 
 SELECT
-  	    first_name, 
-	    last_name, 
-	    COUNT(concat(first_name, last_name)) AS number_of_repetitions
+  	first_name, 
+	last_name, 
+	COUNT(concat(first_name, last_name)) AS number_of_repetitions
 FROM 	patients
 GROUP BY 
-	    CONCAT(first_name, last_name)
+	CONCAT(first_name, last_name)
 HAVING 	COUNT(concat(first_name, last_name))>=2
 
 
@@ -171,8 +174,8 @@ Query:
 */
 
 SELECT
-  	    patients.patient_id,
-  	    first_name,
-  	    last_name
+  	patients.patient_id,
+  	first_name,
+  	last_name
 FROM 	patients
 WHERE 	patients.patient_id NOT IN (SELECT admissions.patient_id FROM admissions)
