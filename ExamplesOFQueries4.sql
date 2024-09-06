@@ -1,6 +1,5 @@
 /* DATABASE NORTHWIND (EASY)
 
-
 Question 32. 
 Show the category_name and description from the categories table sorted by category_name.
 
@@ -8,7 +7,7 @@ Query:
 */
 
 SELECT 
-	    category_name,
+	category_name,
         description
 FROM 	categories
 ORDER BY 
@@ -22,7 +21,7 @@ Query:
 */
 
 SELECT 
-	    contact_name,
+	contact_name,
         address,
         city
 FROM 	customers
@@ -35,7 +34,7 @@ Query:
 */
 
 SELECT 
-	    order_date,
+	order_date,
         shipped_date,
         customer_id,
         freight
@@ -51,7 +50,7 @@ Query:
 */
 
 SELECT 
-	    employee_id,
+	employee_id,
         order_id, 
         customer_id,
         required_date, 
@@ -67,7 +66,7 @@ Query:
 */
 
 SELECT 
-	    order_id
+	order_id
 FROM 	orders
 WHERE 	order_id % 2 = 0
 
@@ -81,7 +80,7 @@ Query:
 
 
 SELECT 
-	    city,
+	city,
         company_name,
         contact_name
 FROM	customers
@@ -96,7 +95,7 @@ Query:
 */
 
 SELECT 
-	    company_name,
+	company_name,
         contact_name,
         fax
 FROM 	customers
@@ -109,22 +108,22 @@ Show the first_name, last_name. hire_date of the most recently hired employee.
 Query:
 */
 
-
 SELECT 
-	    first_name,
+	first_name,
         last_name,
         hire_date
 FROM 	employees
 ORDER BY hire_date DESC
 LIMIT 1
 
-// OR :
+/* or 
+*/
 
 SELECT
-    first_name,
-    last_name,
-    MAX(hire_date) AS hire_date
-FROM  employees
+    	first_name,
+    	last_name,
+    	MAX(hire_date) AS hire_date
+FROM  	employees
 
 /*
 Question 40.
@@ -134,7 +133,7 @@ Query:
 */
 
 SELECT 
-	    round(avg(unit_price),2),
+	round(avg(unit_price),2),
         SUM(units_in_stock),
         SUM(discontinued)
 FROM	products
