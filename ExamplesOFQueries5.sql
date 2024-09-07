@@ -10,7 +10,7 @@ SELECT 	product_name,
         suppliers.company_name,
         categories.category_name
 FROM 	products 	JOIN categories ON categories.category_id = products.category_id
-			        JOIN suppliers ON suppliers.supplier_id = products.supplier_id
+			JOIN suppliers ON suppliers.supplier_id = products.supplier_id
 
 /*
 Question 42.
@@ -20,7 +20,7 @@ Query:
 
 
 SELECT 	categories.category_name,
-	    ROUND(AVG(unit_price),2)
+	ROUND(AVG(unit_price),2)
 FROM    products JOIN categories ON categories.category_id = products.category_id
 GROUP BY 
         category_name
@@ -33,14 +33,14 @@ Query:
 */
 
 SELECT 	city, 
-		company_name, 
-		contact_name, 
-		'customers' AS relationship 
+	company_name, 
+	contact_name, 
+	'customers' AS relationship 
 FROM 	customers 
 UNION
 SELECT 	city, 
-		company_name, 
-		contact_name, 
+	company_name, 
+	contact_name, 
         'suppliers'
 FROM	suppliers
 
@@ -55,20 +55,19 @@ SELECT
         e.first_name,
         e.last_name,
         COUNT(o.order_id) AS num_orders,
-  (CASE
-      WHEN o.shipped_date <= o.required_date THEN 'On Time'
-      ELSE 'Late'
-    END) AS shipped
-FROM orders o
-  JOIN employees e ON e.employee_id = o.employee_id
+  	(CASE
+      		WHEN o.shipped_date <= o.required_date THEN 'On Time'
+      		ELSE 'Late'
+    	END) AS shipped
+FROM orders oJOIN employees e ON e.employee_id = o.employee_id
 GROUP BY
-  e.first_name,
-  e.last_name,
-  shipped
+  	e.first_name,
+  	e.last_name,
+  	shipped
 ORDER BY
-  e.last_name,
-  e.first_name,
-  num_orders DESC
+  	e.last_name,
+  	e.first_name,
+  	num_orders DESC
 
 
 /*
@@ -78,10 +77,9 @@ Query:
 */
 
 SELECT
-		YEAR(orders.order_date) AS year_disc,
-		ROUND(SUM(unit_price* order_details.quantity*order_details.discount),2) AS DISCOUNT
-	
-FROM orders JOIN order_details ON order_details.order_id = orders.order_id
-			JOIN products ON products.product_id = order_details.product_id
+	YEAR(orders.order_date) AS year_disc,
+	ROUND(SUM(unit_price* order_details.quantity*order_details.discount),2) AS DISCOUNT
+FROM orders 	JOIN order_details ON order_details.order_id = orders.order_id
+		JOIN products ON products.product_id = order_details.product_id
 GROUP BY YEAR(orders.order_date)
 ORDER BY year(orders.order_date) DESC
