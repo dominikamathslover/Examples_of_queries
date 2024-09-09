@@ -130,7 +130,7 @@ Query:
 SELECT 
  	province_id, SUM(height)
 FROM 	patients
-GRUOP BY 
+GROUP BY 
 	province_id
 HAVING 	SUM(height) >= 7000
 
